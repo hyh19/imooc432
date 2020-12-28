@@ -97,7 +97,7 @@ export default class GameField extends Model {
 
   draw() {
     const gl = this.gl;
-    RenderContext.switchProgram("tile")
+    RenderContext.switchProgram("default")
     gl.bindFramebuffer(gl.FRAMEBUFFER, null)
     gl.useProgram(RenderContext.getProgram());
     gl.enable(gl.DEPTH_TEST);
@@ -107,6 +107,9 @@ export default class GameField extends Model {
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     this.setMatrixUniform("u_worldview", this.projectViewMatrix);
     this.updateMatrix();
+    
+    this.setFloatUniform('u_id', this.currentUid)
+    console.log("current", this.currentUid)
     super.draw()
 
     this.pick();
@@ -243,6 +246,10 @@ export default class GameField extends Model {
     const id = data[0] + (data[1] << 8) + (data[2] << 16)
     const x = id % 1000
     const y = Math.floor(id / 1000)
+
+    this.selX = x;
+    this.selY = y;
+    this.currentUid = id;
     console.log(x, y, id)
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
 

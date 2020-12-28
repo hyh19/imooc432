@@ -47,5 +47,6 @@ export function d3_tiles(tiles, size, width, height) {
   }
 
   const mesh = new Mesh({vertices, texCoords, colors})
+  mesh.addVertexBuffer('a_id', new Float32Array(ids), 1)
   return mesh
 }
