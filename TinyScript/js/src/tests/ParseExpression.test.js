@@ -31,6 +31,7 @@ describe("ParseExpression", () => {
         const expr2 = createExpr("1*2+3")
         const expr3 = createExpr("10 * (7+4)")
         const expr4 = createExpr("(1*2!=7)==3!=4*5+6")
+        expr4.print()
         assert.equal(ParserUtils.toPostfixExpression(expr1), '1 2 3 * +')
         assert.equal(ParserUtils.toPostfixExpression(expr2), '1 2 * 3 +')
         assert.equal(ParserUtils.toPostfixExpression(expr3), '10 7 4 + *')
